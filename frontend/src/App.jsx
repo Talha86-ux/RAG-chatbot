@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const API_ENDPOINT = "/api/chat"; // proxied to the FastAPI backend by Vite in dev
+const API_ENDPOINT = "/api/chat/chat"; // proxied to the FastAPI backend by Vite in dev
 
 export default function App() {
   const [messages, setMessages] = useState([

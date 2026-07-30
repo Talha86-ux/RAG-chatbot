@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter
-# from rag_chain import answer_question
+from rag_chain import answer_question
 from .schema import ChatRequest, ChatResponse
 
 chat_router = APIRouter()
