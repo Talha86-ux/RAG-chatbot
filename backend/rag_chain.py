@@ -1,11 +1,11 @@
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 from config import (
-    OPENAI_API_KEY,
+    GOOGLE_API_KEY,
     CHROMA_PERSIST_DIR,
     EMBEDDING_MODEL,
     CHAT_MODEL,
@@ -37,7 +37,7 @@ def format_docs(docs):
     )
 
 def get_vectorstore():
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL, api_key=OPENAI_API_KEY)
+    embeddings = GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL, google_api_key=GOOGLE_API_KEY)
     return Chroma(
         persist_directory=CHROMA_PERSIST_DIR,
         embedding_function=embeddings,
@@ -47,7 +47,7 @@ def build_rag_chain(k: int = 4):
     vectorstore = get_vectorstore()
     retriever = vectorstore.as_retriever(search_kwargs={"k": k})
 
-    llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY, temperature=0.2)
+    llm = ChatGoogleGenerativeAI(model=CHAT_MODEL, google_api_key=GOOGLE_API_KEY, temperature=0.2)
 
     chain = (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
