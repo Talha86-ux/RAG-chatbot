@@ -6,4 +6,4 @@ __pycache__/
 backend/.env.example
 backend/chroma_store/
 *.db
-
+venv/
