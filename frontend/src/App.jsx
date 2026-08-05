@@ -106,6 +106,7 @@ export default function App() {
 
 function MessageBubble({ message }) {
   const { role, text, sources, isError } = message;
+
   return (
     <div className={`bubble ${role} ${isError ? "error" : ""}`}>
       <p>{text}</p>
@@ -114,7 +115,7 @@ function MessageBubble({ message }) {
           <span className="sources-label">grounded in</span>
           {sources.map((s, i) => (
             <span className="source-chip" key={i} title={s.snippet}>
-              {s.source.split("/").pop()}
+              {s.source.split(/[/\\]/).pop()}
             </span>
           ))}
         </div>
