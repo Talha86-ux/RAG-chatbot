@@ -4,10 +4,6 @@ from chat.routers import chat_router
 
 app = FastAPI(title="Business Knowledge Base Chatbot", version="1.0.0")
 
-
-
-# Allow the React dev server to call this API.
-# Add your real frontend domain here before deploying to production.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
